@@ -1,0 +1,9 @@
+*.DS_Store
+ps_env/*
+.ipynb_checkpoints/*
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+.Rhistory
