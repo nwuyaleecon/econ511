@@ -1,0 +1,121 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+	% packages that allow mathematical formatting
+
+\usepackage{graphicx}
+	% package that allows you to include graphics
+\usepackage{tikz}
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+\renewcommand{\vector}[1]{\boldsymbol{#1}}
+\newcommand{\problem}[1]{\section*{Problem #1}}
+\newcommand{\problempart}[1]{\paragraph{#1}}
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{ECON 511 Problem Set 3}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+%\textbf{Note:} I use bold symbols to denote vectors and nonbolded symbols to denote scalars. I primarily use vector notation to shorthand some of the sums, since many of the sums are dot products.
+
+\problem{1}
+\problempart{(1)} This follows from Jensen's inequality. Since $1/x$ is convex,
+\[ h \ge \frac{1}{\mu} \]
+\problempart{(2)} The value of the expected PDV is
+\[ V_{j,t} = \mathbb{E}_t \left( \sum_{s=1}^\infty \beta^s \frac{u'(c_{t+s})}{u'(c_t)}\pi_{j,t+s} \right) \]
+The bond price is
+\[ p^B_{j,t} = \mathbb{E}_t\sum_{s=1}^\infty \beta^s \frac{u'(c_{t+s})}{u'(c_t)} r \]
+\[ = \sum_{s=1}^\infty \beta^s r \mathbb{E}_t \frac{u'(c_{t+s})}{u'(c_t)} \]
+\[ = \sum_{s=1}^\infty \beta^s r \mathbb{E}_t \frac{c_t}{u'(c_{t+s})} \]
+\[ = r c_t \sum_{s=1}^\infty \beta^s \mathbb{E}_t \frac{1}{u'(c_{t+s})} \]
+\[ = r \pi_{j,t} \sum_{s=1}^\infty \beta^s h \]
+\[ = \frac{r \pi_{j,t} \beta h}{1-\beta} \]
+The stock price is
+\[ p^N_{j,t} = \mathbb{E}_t\sum_{s=1}^\infty \beta^s \frac{u'(c_{t+s})}{u'(c_t)} \frac{\pi_{j,t+s} - rB}{N} \]
+\[ = \sum_{s=1}^\infty \beta^s \mathbb{E}_t \frac{c_{j,t}}{c_{j,t+s}}\frac{\pi_{j,t+s} - rB}{N} \]
+\[ = \sum_{s=1}^\infty \beta^s \pi_{j,t}\mathbb{E}_t \frac{\pi_{j,t+s} - rB}{N\pi_{j,t+s}}  \]
+\[ = \sum_{s=1}^\infty \beta^s \pi_{j,t}\frac{1}{N}\mathbb{E}_t \left(1 - \frac{rB}{\pi_{j, t+s}} \right) \]
+\[ = \sum_{s=1}^\infty \beta^s \pi_{j,t}\frac{1}{N} \left(1 - rBh \right) \]
+\[ = \frac{\beta}{1-\beta} \pi_{j,t}\frac{1}{N} \left(1 - rBh \right) \]
+\[ = \frac{\beta \pi_{j,t}\left(1 - rBh \right)}{N(1-\beta)}  \]
+The asset prices and value of the firm are independent of time since cash flows are independent across periods, hence no information about the future is obtainable from the past. Hence the the asset prices and firm value don't depend on $t$.
+\problempart{(3)}
+\[ V_{j,t} = \mathbb{E}_t \left( \sum_{s=1}^\infty \beta^s \frac{u'(c_{t+s})}{u'(c_t)}\pi_{j,t+s} \right) \]
+\[  = \mathbb{E}_t \left( \sum_{s=1}^\infty \beta^s \frac{\pi_{j,t}}{\pi_{j,t+s}}\pi_{j,t+s} \right) \]
+
+\[  = \pi_{j,t} \sum_{s=1}^\infty \beta^s\]
+\[ = \frac{\beta\pi_{j,t}}{1-\beta} \]
+Now,
+\[ p^B_{j,t} B + p^N_{j,t} N = \frac{r \pi_{j,t} \beta h B}{1-\beta} + \frac{\beta \pi_{j,t}\left(1 - rBh \right)}{1-\beta} \]
+\[= \frac{\beta \pi_{j, t} }{1-\beta}(rhB + (1-rBh)) = \frac{\beta \pi_{j, t} }{1-\beta} = V_{j,t} \]
+The stock price is decreasing in all three; the higher the rate or the more bonds issued, the less residual profits and hence lower the stock price. If more shares issued, there are fewer residual profits per share, and hence the stock price deceases.
+
+\problempart{(4)}
+For $V$:
+\[ \mathbb{E}_t \left( \frac{V_{t+1}}{V_t} \mid \pi_t = \pi_j \right) = \mathbb{E}_t \left( \frac{\frac{\beta\pi_{j,t+1}}{1-\beta}}{\frac{\beta\pi_{j,t}}{1-\beta}} \mid \pi_t = \pi_j \right)  \]
+\[ =  \mathbb{E}_t \left( \frac{\pi_{j,t+1}}{\pi_{j,t}} \mid \pi_t = \pi_j \right) \]
+\[ =  \mathbb{E}_t \left( \frac{\pi_{t+1}}{\pi_{t}} \mid \pi_t = \pi_j \right) \]
+\[ =  \mathbb{E}_t \left( \frac{\pi_{t+1}}{\pi_j} \mid \pi_t = \pi_j \right) \]
+\[ =  \frac{\mathbb{E}_t \left( \pi_{t+1} \mid \pi_t = \pi_j \right)}{\pi_j} \]
+\[ =  \frac{\mu}{\pi_j} \]
+For $p^B$:
+
+\[ \mathbb{E}_t \left( \frac{p^B_{t+1}}{p^B_t} \mid \pi_t = \pi_j \right) = \mathbb{E}_t \left( \frac{\frac{\beta r h \pi_{j,t+1}}{1-\beta}}{\frac{\beta r h \pi_{j,t}}{1-\beta}} \mid \pi_t = \pi_j \right)  \]
+\[ =  \mathbb{E}_t \left( \frac{\pi_{j,t+1}}{\pi_{j,t}} \mid \pi_t = \pi_j \right) \]
+\[ =  \mathbb{E}_t \left( \frac{\pi_{t+1}}{\pi_{t}} \mid \pi_t = \pi_j \right) \]
+\[ =  \frac{\mu}{\pi_j} \]
+For $p^N$:
+
+\[ \mathbb{E}_t \left( \frac{p^N_{t+1}}{p^N_t} \mid \pi_t = \pi_j \right) = \mathbb{E}_t \left( \frac{\frac{\beta \pi_{j,t+1}(1-rBh)}{N(1-\beta)}}{\frac{\beta \pi_{j,t}(1-rBh)}{N(1-\beta)}} \mid \pi_t = \pi_j \right)  \]
+\[ =  \mathbb{E}_t \left( \frac{\pi_{j,t+1}}{\pi_{j,t}} \mid \pi_t = \pi_j \right) \]
+\[ =  \mathbb{E}_t \left( \frac{\pi_{t+1}}{\pi_{t}} \mid \pi_t = \pi_j \right) \]
+\[ =  \frac{\mu}{\pi_j} \]
+\problempart{(5)}
+The expected rate of return on stock share is:
+\[ \mathbb{E}_t \left(\frac{p^N_{t+1} + \frac{\pi_{t+1} - rB}{N}}{p^N_t} \right) = \mathbb{E}_t\left(\frac{p^N_{t+1} }{p^N_t}\right) + \mathbb{E}_t \left( \frac{\pi_{t+1} - rB}{N p^N_t} \right) \]
+\[ = \frac{\mu}{\pi_j} + \mathbb{E}_t \left( \frac{\pi_{t+1} - rB}{\frac{\beta \pi_{j}(1-rBh)}{(1-\beta)}} \right)  \]
+\[ = \frac{\mu}{\pi_j} + \frac{(1-\beta)}{\beta(1-rBh)}\mathbb{E}_t \left( \frac{\pi_{t+1} - rB}{\pi_{j}} \right)  \]
+\[ = \frac{\mu}{\pi_j} + \frac{(1-\beta)}{\beta(1-rBh)}\left( \frac{\mu - rB}{\pi_{j}} \right)  \]
+\[ = \frac{\mu}{\pi_j} + \frac{(1-\beta)}{\beta(1-rBh)}\left( \frac{\mu - rB}{\pi_{j}} \right)  \]
+\[ = \frac{\mu}{\pi_j} + \frac{\mu - rB}{\frac{\beta \pi_j}{1-\beta}(1-rBh)} \]
+\[ = \frac{\mu}{\pi_j} + \frac{r (\mu h - r B h)}{\frac{\beta r h \pi_j}{1-\beta}(1-rBh)} \]
+\[ = \frac{\mu}{\pi_j} + \frac{r (\mu h - r B h)}{p^B_{t}(1-rBh)} \]
+\[ = \frac{\mu}{\pi_j} + \frac{r}{p^B_t}\left( \frac{ \mu h - r B h}{1-rBh} \right) \]
+From part 1, we know that $h \ge 1/\mu$, and hence $\mu h \ge 1$. Therefore
+\[\left( \frac{ \mu h - r B h}{1-rBh} \right) \ge 1 \]
+so
+\[ \frac{\mu}{\pi_j} + \frac{r}{p^B_t}\left( \frac{ \mu h - r B h}{1-rBh} \right)\ge  \frac{\mu}{\pi_j} + \frac{r}{p^B_t}\]
+Hence the expected return on stocks is more than the expected return on bonds
+Additionally,
+\[ \frac{\mu}{\pi_j} + \frac{r}{p^B_t}\left( \frac{ \mu h - r B h}{1-rBh} \right) \]
+\[ = \frac{\mu}{\pi_j} + \frac{r}{p^B_t}\left( \frac{ \mu h - 1}{1-rBh} + 1 \right) \]
+Hence increasing $rB$ decreases the denominator and increases the expected return on stocks.
+
+The expected rate of return on stock is higher; the consumers are risk averse and hence need to be compensated for the uncertainty in returns. The expected return is increasing in $rB$; the more leveraged the firm is, the higher variance in the yield, and hence the riskier stocks are and the higher return is needed to compensate risk averseness.
+
+\problem{2}
+\problempart{(1)}
+
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
