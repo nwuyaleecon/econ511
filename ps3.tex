@@ -8,7 +8,8 @@
 \usepackage{amssymb}
 	% packages that allow mathematical formatting
 
-\usepackage{graphicx}
+\usepackage[final]{graphicx}
+\usepackage{subcaption}
 	% package that allows you to include graphics
 \usepackage{tikz}
 \usepackage{setspace}
@@ -116,6 +117,148 @@ The expected rate of return on stock is higher; the consumers are risk averse an
 
 \problem{2}
 \problempart{(1)}
+For (i.b),
+\[ V(k,z) = \max \left[ \max_{k'} \left[(1-P)(zk^\theta - Rk)+ \beta E_{z'}V(k',z') \right], zk^\theta - Rk + \beta E_{z'}V((1-\delta)k, z') \right] \]
+For (ii.a),
+\[ V(k,z) = \max \left[ \max_{k'} \left[z(k')^\theta - Rk' - F + \beta E_{z'}V((1-\delta)k',z') \right], zk^\theta - Rk + \beta E_{z'}V((1-\delta)k, z') \right] \]
+For (ii.b),
+\[ V(k,z) = \max \left[ \max_{k'} \left[(1-P)(z(k')^\theta - Rk') + \beta E_{z'}V((1-\delta)k',z') \right], zk^\theta - Rk + \beta E_{z'}V((1-\delta)k, z') \right] \]
+The $P$ model is probably more empirically relevant, since it can be interpreted as firms sacrificing some of their productivity for investment, rather than everyone having identical adjustment costs irrespective of firm size.
 
+As for timing, in (i) the investment decision only impacts the future value of the firm, where as in (ii) it affects both the current value of capital and the future value.
+
+As we stated earlier, the fixed adjustment cost $F$ is fixed regardless of productivity, where as the fractional cost $P$ may vary depending on productivity.
+\problempart{(2)}
+See code.
+\problempart{(3)} See figure 1 for the benchmark graphs of the inaction bands.
+\begin{center}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig1}
+\caption{Bands for (i) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig2}
+\caption{Bands for (i) b}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig3}
+\caption{Bands for (ii) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig4}
+\caption{Bands for (ii) b}
+\end{subfigure}
+\caption{Benchmark cases}
+\end{figure}
+\end{center}
+\problempart{(4)}
+In case (i)a, the bands are constant over $z$, since $z$ is iid drawn over time, and the slope remains fixed and the width is fixed. In (i)b, the bands surround the same $k^*$ (since $z$ is iid), but the width increases since more productive firms pay a higher cost to adjust. In (ii), the slope is increasing due to the effect of productivity on the current value of capital. The band is wider around the extreme values of $z$, since more productive firms are willing to keep higher levels of capital for larger profits in the current period, where less productive firms maintain low levels of capital to avoid losses in the current period.
+\begin{center}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig5}
+\caption{Bands for (i) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig6}
+\caption{Bands for (i) b}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig7}
+\caption{Bands for (ii) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig8}
+\caption{Bands for (ii) b}
+\end{subfigure}
+\caption{$\rho = 0$ cases}
+\end{figure}
+\end{center}
+\problempart{(5)} The larger adjustment cost increases the width of the inaction bands; the larger the costs, the more tolerant you will be of being farther away from $k^*$.
+\begin{center}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig9}
+\caption{Bands for (i) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig10}
+\caption{Bands for (i) b}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig11}
+\caption{Bands for (ii) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig12}
+\caption{Bands for (ii) b}
+\end{subfigure}
+\caption{Doubled adjustment costs}
+\end{figure}
+\end{center}
+\problempart{(6)} Increasing $\sigma$ makes all the slopes steeper in all cases, due to convexity of the profit function in $\log z$. Larger variance disproportionately yields more profits from high tails than losses from low tails. The width also increases in all cases since firms are more willing to accept waiting for the next period since the shock is more variable. We expect frequency of adjustments to decrease in this case.
+\begin{center}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig13}
+\caption{Bands for (i) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig14}
+\caption{Bands for (i) b}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig15}
+\caption{Bands for (ii) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig16}
+\caption{Bands for (ii) b}
+\end{subfigure}
+\caption{Increased $\sigma$}
+\end{figure}
+\end{center}
+\problempart{(7)} The widening as a result of increasing $\sigma$ is smaller for larger $\delta$. When $\delta$ is large, the option to wait for a more / less productive period to adjust capital is much more costly, and hence the width of the inaction band decreases and is less sensitive to $\sigma$.
+\begin{center}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig17}
+\caption{Bands for (i) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig18}
+\caption{Bands for (i) a, increased $\sigma$}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig19}
+\caption{Bands for (i) b}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig20}
+\caption{Bands for (i) b, increased $\sigma$}
+\end{subfigure}
+\caption{Increased $\delta$, model (i)}
+\end{figure}
+\begin{figure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig21}
+\caption{Bands for (ii) a}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig22}
+\caption{Bands for (ii) a, increased $\sigma$}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig23}
+\caption{Bands for (ii) b}
+\end{subfigure}
+\begin{subfigure}{.5\textwidth}
+\includegraphics[width=8cm]{ps3q2_fig24}
+\caption{Bands for (ii) b, increased $\sigma$}
+\end{subfigure}
+\caption{Increased $\delta$, model (ii)}
+\end{figure}
+\end{center}
 \end{document}
 	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
