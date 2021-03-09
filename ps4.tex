@@ -1,0 +1,173 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+	% packages that allow mathematical formatting
+
+\usepackage[final]{graphicx}
+\usepackage{subcaption}
+	% package that allows you to include graphics
+\usepackage{tikz}
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+\renewcommand{\vector}[1]{\boldsymbol{#1}}
+\newcommand{\problem}[1]{\section*{Problem #1}}
+\newcommand{\problempart}[1]{\paragraph{#1}}
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{ECON 511 Problem Set 4}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+%\textbf{Note:} I use bold symbols to denote vectors and nonbolded symbols to denote scalars. I primarily use vector notation to shorthand some of the sums, since many of the sums are dot products.
+
+\problem{1}
+\problempart{(1)}
+The maximization problem is given by
+\[ V = \max \mathbb{E}\left[\int_{t=0}^\infty e^{-\rho t} \left(z_t k_t -i_t- \frac{i_t^2}{2}\right) \ dt \right] \]
+subject to
+\[ \dot{k_t} = i_t - \delta k_t \]
+\[ d z_t = \mu \ dt + \sigma \ d W_t\]
+\problempart{(2)}
+The HJB equation is
+\[ \rho V(k,z) = \max_i \left[z k - i - \frac{i^2}{2} + V_k(k,z) (i - \delta k) + V_z(k,z) \mu + \frac{1}{2}V_{zz}(k,z)\sigma^2\right]  \]
+\problempart{(3)}
+The FOC on $i$ is
+\[ -1 - i + V_k(k,z) = 0 \]
+\[ i = V_k(k,z) - 1 \]
+Plugging in, we have
+\[ \rho V(k,z) = z k - V_k(k,z) + 1 - \frac{(V_k(k,z) - 1)^2}{2} + V_k(k,z) (V_k(k,z) - 1 - \delta k) + V_z(k,z) \mu + \frac{1}{2}V_{zz}(k,z)\sigma^2  \]
+\[  = z k - V_k(k,z) + 1 - \frac{(V_k(k,z))^2 - 2 V_k(k,z) + 1}{2} + V_k(k,z) (V_k(k,z) - 1 - \delta k) + V_z(k,z) \mu + \frac{1}{2}V_{zz}(k,z)\sigma^2  \]
+\[  = z k - V_k(k,z) + \frac{1}{2} + \frac{1}{2}(V_k(k,z))^2 - \delta k V_k(k,z) + V_z(k,z) \mu + \frac{1}{2}V_{zz}(k,z)\sigma^2  \]
+We assume the quadratic functional form:
+\[ V(k,z) = a_0 + a_1 k + a_2 z + a_3 z^2 + a_4 zk \]
+Then
+\[ V_k(k,z) = a_1 + a_4 z \]
+\[ V_z(k,z) = a_2 + 2 a_3 z + a_4 k \]
+\[ V_{zz}(k,z) = 2 a_3  \]
+Starting with the $zk$ coefficient as in the hint, we have:
+\[ \rho a_4 = 1 - \delta a_4 \]
+\[ a_4 = \frac{1}{\rho + \delta} \]
+We then solve for the $z^2$ coefficients on both sides:
+\[ \rho a_3 = \frac{1}{2}(a_4^2) \]
+\[ a_3 = \frac{1}{2\rho(\rho+\delta)^2} \]
+We can now solve for $a_1$ by examining coefficient on $k$:
+\[ \rho a_1 = - \delta a_1  + a_4 \mu  \]
+\[ a_1(\rho + \delta) = a_4 \mu  \]
+\[ a_1 = \frac{\mu}{(\rho + \delta)^2}\]
+And now for $a_2$ by examining the coefficient on $z$:
+\[ \rho a_2 = - a_4 + a_1a_4 + 2 a_3 \mu   \]
+\[ \rho a_2 = - \frac{1}{\rho + \delta} + \frac{\mu}{(\rho + \delta)^3} + \frac{\mu}{\rho(\rho+\delta)^2}\]
+\[ \rho a_2 = - \frac{\rho(\rho + \delta)^2}{\rho(\rho + \delta)^3} + \frac{\rho \mu}{\rho(\rho + \delta)^3} + \frac{\mu(\rho + \delta)}{\rho(\rho+\delta)^3}\]
+\[ a_2 =  \frac{\rho \mu + \mu(\rho + \delta) - \rho(\rho + \delta)^2}{\rho^2(\rho + \delta)^3} \]
+Finally, the constant term $a_0$:
+\[ \rho a_0 = \frac{1}{2}-a_1 + \frac{1}{2}a_1^2 + a_2 \mu + a_3 \sigma^2 \]
+\[ a_0 = \frac{1}{2\rho} - \frac{a_1}{\rho} + \frac{a_1^2}{2\rho} + \frac{\mu a_2}{\rho } + \frac{a_3\sigma^2}{\rho} \]
+\[ a_0 = \frac{1}{2\rho} - \frac{\mu}{\rho(\rho + \delta)^2}+ \frac{\mu^2}{2\rho (\rho + \delta)^4} + \frac{\rho \mu^2 + \mu^2(\rho + \delta) - \mu \rho(\rho + \delta)^2}{\rho^3(\rho + \delta)^3} + \frac{\sigma^2}{2\rho^2(\rho+\delta)^2} \]
+For the sake of saving ugliness, we will not write $V$ out explicitly, since $V = a_0 + a_1k + a_2 z + a_3 z^2 + a_4 zk$ and we have defined all the coefficients already.
+\problempart{(4)}
+The only coefficient featuring $\sigma^2$ is $a_0$. So
+\[ \frac{\partial V}{\partial \sigma^2} = \frac{\partial a_0}{\partial \sigma^2} = \frac{a_3}{\rho} = \frac{1}{2\rho^2(\rho+\delta)^2} \]
+This is positive, hence the economic value of uncertainty is positive. This is because the firm's net present value of profits are convex in $z$. Increasing both $\rho$ and $\delta$ decreases the value of uncertainty. The higher the discount rate, the worse the future profits and hence the less value of future fluctuations of $z$. The higher $\delta$, the less convex the profits.
+\problempart{(5)}
+$i = V_k(k,z) - 1$ so
+\[ i^* = a_1 + a_4 z - 1 = \frac{\mu}{(\rho + \delta)^2} + \frac{1}{\rho + \delta}z - 1 \]
+This is decreasing in $\rho$ and $\delta$ and increasing in $\mu$ and $z$. This is similar to the $q$-model in that it is independent of $k$ and increasing in productivity, and implies firms invest for $q > 1$ and disinvest for $q < 1$. Investment increases in $\mu$, since that results in expected higher future profitability, and decreases in $\rho, \delta$ for the same reasons as the previous part, that they decrease the value of the future profits.
+
+\problem{2}
+\problempart{(1)}
+$K^*$ satisfies:
+\[ K^* = \arg \max z k^\theta - rk \]
+The FOC gives
+\[ \theta z (K^*)^{\theta - 1} = r \]
+\[ K^* = \left(\frac{r}{\theta z}\right)^{\frac{1}{\theta - 1}}\]
+\problempart{(2)}
+We have $e^x = K / K^*$, so $K = K^* e^x$. So the flow revenue
+\[ zK^\theta - rK = z(K^* e^x)^\theta - r K^* e^x \]
+\[ = z(K^*)^\theta e^{\theta x} - r K^* e^x \]
+Plugging in $K^*$, we get
+\[ = z\left(\frac{r}{\theta z}\right)^{\frac{\theta}{\theta - 1}} e^{\theta x} - r \left(\frac{r}{\theta z}\right)^{\frac{1}{\theta - 1}} e^x \]
+\[ = \left(\frac{r^\theta}{\theta z}\right)^{\frac{1}{\theta-1}} \left( \frac{1}{\theta} e^{\theta x} - e^x \right)\]
+Approximating the expression around 0 using a Taylor expansion, we have
+\[ = \left(\frac{r^\theta}{\theta z}\right)^{\frac{1}{\theta-1}}\left(\frac{1}{\theta}\left(1 + \theta x + \frac{1}{2}\theta^2 x^2\right) - \left(1 + x + \frac{1}{2}x^2\right)\right)\]
+\[ = \left(\frac{r^\theta}{\theta z}\right)^{\frac{1}{\theta-1}}\left(\left(\frac{1}{\theta} + \frac{1}{2}\theta x^2\right) - \left(1 + \frac{1}{2}x^2\right)\right)\]
+\[ = \left(\frac{r^\theta}{\theta z}\right)^{\frac{1}{\theta-1}}\left(\left(\frac{1}{\theta} -1 \right) + \frac{1}{2}x^2\left( \theta -  1\right)\right)\]
+\[ = r\left(\frac{r}{\theta z}\right)^{\frac{1}{\theta-1}}\left(\left(\frac{1}{\theta} -1 \right) + \frac{1}{2}x^2\left( \theta -  1\right)\right)\]
+\[ = rK^*\left(\left(\frac{1}{\theta} -1 \right) + \frac{1}{2}x^2\left( \theta -  1\right)\right)\]
+
+\problempart{(3)}
+The nonrecursive problem is given by (using the approximation from part 2)
+\[ \max_x \mathbb{E} \left[ \int_0^\infty e^{-rt}\left(r K^*_t \left(\left(\frac{1}{\theta} -1 \right) + \frac{1}{2}x_t^2\left( \theta -  1\right)\right) - K^*_tF'1_{x_t \neq 0}\right)\ dt \right]  \]
+subject to
+\[ K^*_t = \left(\frac{r}{\theta z_t}\right)^{\frac{1}{\theta - 1}} \]
+\[ x_t = \log(K_t/K^*_t) \]
+\[ \log z_t = \sigma W_t \]
+Rewriting the objective by converting to $K^*_t/K^*_0$, we have
+\[ \max_x \mathbb{E} \left[ K^*_0 \int_0^\infty e^{-rt}\left(r \left(\frac{ K^*_t}{K^*_0} \right) \left(\left(\frac{1}{\theta} -1 \right) + \frac{1}{2}x_t^2\left( \theta -  1\right)\right) - \frac{ K^*_t}{K^*_0} F'1_{x_t \neq 0}\right)\ dt \right]  \]
+subject to
+\[ \frac{ K^*_t}{K^*_0}  = \left(\frac{z_0}{ z_t}\right)^{\frac{1}{\theta - 1}} \]
+\[ x_t = \log(K_t/(K^*_t/K^*_0)K^*_0) = \log\left(\frac{K_t}{K_0} \frac{K_0}{K^*_0} \frac{K^*_0}{K^*_t} \right) = \log(K_t/K_0) + x_0 + \frac{1}{\theta - 1} \log(z_t/z_0) \]
+\[ \log z_t = \sigma W_t \]
+Adding a dummy variable $y_t = K^*_t/K^*_0$, we get
+\[ \max_x \mathbb{E} \left[ K^*_0 \int_0^\infty e^{-rt}\left(r y_t \left(\left(\frac{1}{\theta} -1 \right) + \frac{1}{2}x_t^2\left( \theta -  1\right)\right) - y_t F'1_{x_t \neq 0}\right)\ dt \right]  \]
+subject to
+\[ y_t  = \left(\frac{z_0}{ z_t}\right)^{\frac{1}{\theta - 1}} \]
+\[ x_t = \log(K_t/K_0) + x_0 + \frac{1}{\theta - 1} \log(z_t/z_0) \]
+\[ \log z_t = \sigma W_t \]
+Note now that the only way $K^*_0$ factors into the maximization problem is just as a constant term. Hence the value of the firm is linear in $K^*_0$, so the value of the firm is homogeneous of degree 1 in $K^*$. The law of motion of $x$ is then
+\[ x = \log(K_t/K_t^*) \]
+\[ dx = - d \log K^* \]
+Note that $\log K^* = c - \frac{1}{\theta - 1} \log z$, where the constant term $c$ has no time dependence.
+Hence in the inaction region close to $x=0$, the law of motion of $x$ follows:
+\[ dx = - d \log K^* =  d\left( \frac{1}{\theta - 1} \log z \right) =  \frac{\sigma }{\theta - 1} \ dW  \]
+\problempart{(4)}
+Note that by definition of $K^*$, we have
+\[ K^*_t = \left(\frac{r}{\theta z_t}\right)^{\frac{1}{\theta - 1}} \]
+\[ d \log K^*_t = - \frac{1}{\theta - 1} d \log z_t = \frac{\sigma }{1 - \theta} dW \]
+Using Ito's Lemma, we get
+\[ dK^*_t = K^*_t d\log K^*_t + \frac{1}{2}K^*_t(d\log K^*_t)^2 \]
+\[ dK^*_t = K^*_t \frac{\sigma}{1-\theta} dW  + \frac{1}{2}K^*_t\left(\frac{\sigma }{1 - \theta}\right)^2 dt \]
+Let
+\[ \pi(x) = r\left(\left(\frac{1}{\theta} -1 \right) + \frac{1}{2}x^2\left( \theta -  1\right)\right) \]
+We have the following two laws of motion:
+\[ dK^*_t = K^*_t \frac{\sigma}{1-\theta} dW  + \frac{1}{2}K^*_t\left(\frac{\sigma }{1 - \theta}\right)^2 dt \]
+\[ dx =  \frac{\sigma }{\theta - 1} \ dW  \]
+where the second comes from the previous problem part. The 2-variable HJB is then
+\[ rV = K^* \pi(x) + V_k\left(\frac{1}{2}K^* \left(\frac{\sigma }{1 - \theta}\right)^2 \right) + (V_x)(0) + \frac{1}{2}V_{kk}\left(K^* \frac{\sigma}{1-\theta}\right)^2 + \frac{1}{2}V_{xx} \left(\frac{\sigma }{\theta - 1} \right)^2 + V_{kx}K^* \frac{\sigma}{1-\theta}\frac{\sigma }{\theta - 1}  \]
+\[ rV = K^* \pi(x) + \frac{1}{2} \left( \frac{\sigma }{1 - \theta}\right)^2 \left(K^*V_k + V_{kk} (K^*_t)^2 + V_{xx} - 2 V_{kx} K^* \right) \]
+Using $V = K^* W$, we get that $V_k = W$, $V_{kk} = 0$, $V_{kx} = W'$, $V_{xx} = K^*W''$, so
+\[ rK^*W = K^* \pi(x) + \frac{1}{2} \left( \frac{\sigma }{1 - \theta}\right)^2 \left(K^*W + K^*W'' - 2 W' \right) \]
+\[ r W =  \pi(x) + \frac{1}{2} \left( \frac{\sigma }{1 - \theta}\right)^2 \left(W + W'' - 2 W'  \right) \]
+\problempart{(5)}
+The upper band bound is $\overline{x}$, and let the optimal adjustment at that bound be $\overline{x}^*$. Similarly, let the lower band bound be $\underline{x}$ and the optimal adjustment be $\underline{x}^*$. We have
+\[ W(\overline{x}) = W(\overline{x}^*) - F' \]
+\[ W(\underline{x}) = W(\underline{x}^*) - F' \]
+Optimality of $\overline{x}^*, \underline{x}^*$ imply
+\[ W'(\overline{x}^*) = 0 \]
+\[ W'(\underline{x}^*) = 0 \]
+Finally, together with the previous conditions, since $F'$ is a constant, we get
+\[ W'(\overline{x}) = 0 \]
+\[ W'(\underline{x}) = 0 \]
+\problempart{(6)}
+We first can plug the form into the HJB equation and match coefficients of terms: this gives 5 equations on 7 unknown variables ($a,b,c,d,f,g,h$). We also have the conditions from the previous part; this gives us 4 more unknowns: $\overline{x}$, $\overline{x}^*$, $\underline{x}$, $\underline{x}^*$, and 6 more equations. All together, we have 11 equations on 11 unknowns, so we can solve this system of equations to find the desired parameters.
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
