@@ -1,0 +1,155 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+	% packages that allow mathematical formatting
+
+\usepackage[final]{graphicx}
+\usepackage{subcaption}
+	% package that allows you to include graphics
+\usepackage{tikz}
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+\renewcommand{\vector}[1]{\boldsymbol{#1}}
+\newcommand{\problem}[1]{\section*{Problem #1}}
+\newcommand{\problempart}[1]{\paragraph{#1}}
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{ECON 511 Problem Set 4}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+%\textbf{Note:} I use bold symbols to denote vectors and nonbolded symbols to denote scalars. I primarily use vector notation to shorthand some of the sums, since many of the sums are dot products.
+
+\problem{1}
+\problempart{1}
+The consumer problem is given by
+\[ \max E_0 \left[ \sum_{t=0}^\infty \beta^t \left( \frac{c_t(s_t)^{1-\theta}}{1-\theta} - \gamma\frac{\epsilon}{1+\epsilon}h_t(s_t)^{\frac{1+\epsilon}{\epsilon}} \right) \right] \]
+subject to
+\[ c_t(s_t) + b_{t+1}(s_t) = (1+r_t(s_{t}))b_t(s_{t-1}) + w_t(s_t)h_t(s_t) \]
+\[ \lim_{t \to \infty} \left( b_{t+1}(s_t) \prod_{\tau=1}^t \frac{1}{1+r_\tau(s_\tau)} \right) = 0 \]
+\problempart{2} FOCs:
+\[ (c(s))^{-\theta} = \lambda(s) \]
+\[ \gamma (h(s))^{1/\epsilon} = w(s)\lambda(s)\]
+Solving for $h$, we get
+\[ h(s) = \left( \frac{w(s)\lambda(s)}{\gamma} \right)^\epsilon \]
+\[ \frac{\partial h}{\partial w} = \frac{\epsilon\lambda}{\gamma} \left( \frac{w\lambda}{\gamma} \right)^{\epsilon - 1} \]
+\[ \frac{\partial h}{\partial w}\frac{w}{h} = \frac{\epsilon\lambda}{\gamma} \left( \frac{w\lambda}{\gamma} \right)^{\epsilon - 1}\frac{w}{h} = \epsilon \]
+
+\problempart{3}
+The labor FOC for the firm is:
+\[ w(s) = (1-\alpha)A(s)k^\alpha n^{-\alpha} = (1-\alpha) \frac{y}{n} \]
+\problempart{4}
+Using the FOCs from the firm and consumer, we get
+\[ (c(s))^{-\theta} = \lambda(s) \]
+\[ \gamma (h(s))^{1/\epsilon} = w(s)\lambda(s)\]
+\[ w(s) =  (1-\alpha) \frac{y}{n} \]
+\[ \gamma n^{1/\epsilon} =(1-\alpha) \frac{y}{n} c^{-\theta} \]
+\[ n^{(1+\epsilon)/\epsilon }= \frac{(1-\alpha)yc^{-\theta}}{\gamma}  \]
+\[ n = \left( \frac{(1-\alpha)y}{\gamma c^\theta} \right)^{\frac{\epsilon}{1+\epsilon}} \]
+\problempart{5}
+Taking logs, we get
+\[ \log n = \frac{\epsilon}{1+\epsilon} \log (1-\alpha) + \frac{\epsilon}{1+\epsilon} \log y - \frac{\epsilon}{1+\epsilon} \log \gamma - \theta \frac{\epsilon}{1+\epsilon} \log c  \]
+so
+\[ V\log n = \left(\frac{\epsilon}{1+\epsilon}\right)^2 (V \log y  + \theta^2 V \log c - 2 \theta Cov(\log y, \log c)) \]
+\[  \frac{\sqrt{V \log y  + \theta^2 V \log c - 2 \theta Cov(\log y, \log c)}}{\sqrt{V\log n}} - 1 = \left(\frac{1}{\epsilon}\right)  \]
+\[ \epsilon = \frac{\sqrt{V\log h}}{  \sqrt{V \log y  + \theta^2 V \log c - 2 \theta Cov(\log y, \log c)} - \sqrt{V\log h} }  \]
+From the facts given, we have
+\[ V\log c = (9/16) V \log y \]
+\[ Cov(\log y, \log c) = Corr(\log y, \log c) \sqrt{V (\log c) \  V (\log y)} = \frac{9}{16} V \log y \]
+\[ V\log h = (9/25) V \log y \]
+So we get
+\[ \epsilon = \frac{\sqrt{V\log h}}{ \sqrt{V\log h} + \sqrt{V \log y  + \theta^2 V \log c - 2 \theta Cov(\log y, \log c)}}  \]
+\[ = \frac{(3/5)\sqrt{V\log y}}{  \sqrt{V \log y  + \theta^2 (9/16) V \log y - 2(9/16) \theta V \log y}} - (3/5) \sqrt{V\log y} \]
+\[ = \frac{(3/5)}{ \sqrt{1 +  \theta^2 (9/16) - 2(9/16) \theta } - (3/5)} \]
+\[ = \frac{(3/5)}{ (3/5) + \sqrt{1  - (9/16) }} \approx 9.76597 \]
+This is very large.
+\problempart{6}
+If $\theta = 2$, we have
+\[ \epsilon = \frac{(3/5)}{ \sqrt{1  + \theta^2 (9/16) - 2(9/16) \theta } - (3/5)} \]
+\[ \epsilon = \frac{(3/5)}{ \sqrt{1  + 4 (9/16) - 2(9/16)2 } - (3/5)} \]
+\[ = \frac{3/5}{2/5} = 1.5 \]
+This is more reasonable; since $\theta$ increasing decreases the IES, this allows for more volatility in $h$ and hence allows $\epsilon$ to be smaller.
+
+\problem{2}
+\problempart{1}
+In steady state, $\dot{V}, \dot{J}, \dot{W}, \dot{U}$ are all 0 so we have
+\[ rV = -pc+\frac{1}{\sqrt{\theta}}(J-V) \]
+\[ rJ = p - w - \tau + \lambda(V - J) \]
+\[ rW = w + \lambda(U - W)\]
+\[ rU = z + \sqrt{\theta}(W-U) \]
+Imposing the Nash Bargaining solution, we get (from lecture slides)
+\[ W - U = \frac{\beta}{1-\beta}(J-V) \]
+Solving
+\[ w = \beta p c + \beta (p - \tau) + (1-\beta)z + \frac{1}{\sqrt{\theta}}\beta(\theta - 1)(J - V) \]
+Since $\partial w/ \partial \tau = -\beta < 0$, increasing $\tau$ decreases the wage because it reduces the firm's profits.
+\problempart{2}
+The free entry condition implies
+\[ V = 0 \]
+\[ J = pc \sqrt{\theta} \]
+So now
+\[ w = \beta p c + \beta (p - \tau) + (1-\beta)z + \frac{1}{\sqrt{\theta}}\beta(\theta - 1)(pc\sqrt{\theta}) \]
+\[ = \beta p c + \beta (p - \tau) + (1-\beta)z + \beta(\theta - 1)(pc) = \beta \theta p c + \beta (p - \tau) + (1-\beta)z \]
+As $p$ increases, $w$ increases, since higher worker productivity should lead to higher wages. We discussed $\tau$ on the previous part. As $c$ increases, $w$ increases, since it is more costly to have a vacancy. As $\theta$ increases, $w$ increases, as it is more difficult to find workers for vacancies.
+\problempart{3}
+In steady state,
+\[ u = \frac{\lambda}{\lambda + \sqrt{\theta}} \]
+By budget balance
+\[ uz = (1-u)\tau \]
+\[ \tau = z\frac{u}{1-u} = z \frac{\frac{\lambda}{\lambda + \sqrt{\theta}}}{\frac{\sqrt{\theta}}{\lambda + \sqrt{\theta}}} = \frac{z\lambda}{\sqrt{\theta}}\]
+\[ w = \beta \theta p c + \beta (p - \tau) + (1-\beta)z = \beta \theta p c + \beta \left(p - \frac{z\lambda}{\sqrt{\theta}}\right) + (1-\beta)z\]
+The added effect to $\partial w/ \partial \theta$ is $\frac{1}{2}\beta z\lambda \theta^{-3/2}$. As $\theta$ increases, the less the impact of the tax burden on output because there are fewer unemployed, and hence the higher the wages.
+\problempart{4}
+Free entry gives
+\[ J = pc \sqrt{\theta} \]
+From the Bellman equation, we have
+\[ rJ = p - w - \tau + \lambda(V - J) \]
+Then
+\[ rpc \sqrt{\theta} = p - w - \tau - \lambda pc \sqrt{\theta} \]
+Plugging in $w, \tau$ from above, we get
+\[ (r + \lambda)pc \sqrt{\theta} = p - \left(\beta \theta p c + \beta \left(p - \frac{z\lambda}{\sqrt{\theta}}\right) + (1-\beta)z\right) - \frac{z\lambda}{\sqrt{\theta}}  \]
+Dividing through by $p$, we get
+\[ (r + \lambda)c \sqrt{\theta} = 1 - \left(\beta \theta  c + \beta \left( 1 - \frac{z}{p}\frac{\lambda}{\sqrt{\theta}}\right) + (1-\beta)\frac{z}{p}\right) - \frac{\lambda}{\sqrt{\theta}}\frac{z}{p}  \]
+Where $\theta^*$ solves this implicit expression. Note the dependence on $z$ and $p$ is only through $z/p$, so $\theta^*$ only depends on this ratio.
+
+After determining $\theta^*$, we can find
+\[ u^* = \frac{\lambda}{\lambda + \sqrt{\theta^*} } \]
+and $v^* = \theta^* u^*$.
+\problempart{5}
+We first solve for $z/p$ in terms of $\theta$:
+\[ (r + \lambda)c \sqrt{\theta} = 1 - \beta \theta  c - \beta \left( 1 - \frac{z}{p}\frac{\lambda}{\sqrt{\theta}}\right) - (1-\beta)\frac{z}{p} - \frac{\lambda}{\sqrt{\theta}}\frac{z}{p}  \]
+\[ (r + \lambda)c \sqrt{\theta} = 1 - \beta \theta  c  - \beta  + \beta  \frac{z}{p}\frac{\lambda}{\sqrt{\theta}}- (1-\beta)\frac{z}{p} - \frac{\lambda}{\sqrt{\theta}}\frac{z}{p}  \]
+\[ (r + \lambda)c \sqrt{\theta} - 1 + \beta \theta c + \beta =  (\beta - 1)  \frac{z}{p}\frac{\lambda}{\sqrt{\theta}}- (1-\beta)\frac{z}{p}   \]
+\[ (r + \lambda)c \sqrt{\theta} - 1 + \beta \theta c + \beta =  -(1 - \beta)  \frac{z}{p}\left( \frac{\lambda}{\sqrt{\theta}} + 1 \right)   \]
+\[ \frac{1 - \beta \theta c - \beta - (r + \lambda)c \sqrt{\theta}}{1-\beta} \frac{\sqrt{\theta}}{\lambda + \sqrt{\theta}}  =   \frac{z}{p}   \]
+\[ \frac{z}{p} = \left(1 -  \frac{ \beta \theta c + (r + \lambda)c \sqrt{\theta}}{1-\beta} \right) \frac{\sqrt{\theta}}{\lambda + \sqrt{\theta}}   \]
+Taking the partial derivative, we get
+\[ \frac{\partial (z/p)}{\partial \theta} = \left( -  \frac{ \beta c + (1/2)(r + \lambda)c \theta^{-1/2}}{1-\beta} \right) \frac{\sqrt{\theta}}{\lambda + \sqrt{\theta}} + \left(1 -  \frac{ \beta \theta c + (r + \lambda)c \sqrt{\theta}}{1-\beta} \right) \frac{(\lambda + \sqrt{\theta})(1/2)(\theta^{-1/2})- \sqrt{\theta}((1/2) \theta^{-1/2})}{(\lambda + \sqrt{\theta})^2} \]
+\[= -  \frac{ \beta c\sqrt{\theta} + (1/2)(r + \lambda)c }{(1-\beta)(\lambda + \sqrt{\theta})} + \left(1 -  \frac{ \beta \theta c + (r + \lambda)c \sqrt{\theta}}{1-\beta} \right) \frac{\lambda}{2\sqrt{\theta}(\lambda + \sqrt{\theta})^2} \]
+\[= -  \frac{ \beta c\sqrt{\theta} + (1/2)(r + \lambda)c }{(1-\beta)(\lambda + \sqrt{\theta})} + \frac{\lambda}{2\sqrt{\theta}(\lambda + \sqrt{\theta})^2} -  \lambda \frac{ \beta \sqrt{\theta} c + (r + \lambda)c }{2(1-\beta)(\lambda + \sqrt{\theta})^2}  \]
+The limit as $\theta \to \infty$ is
+\[ - \frac{\beta}{1-\beta} < 0 \]
+and the limit as $\theta \to 0$ is $\infty$ (from the middle term). Since the derivative of the inverse is the reciprocal, the sign doesn't change, and hence as $\theta^* \to 0$, $\theta^*$ is increasing in $(z/p)$ and when $\theta^* \to \infty$, $\theta^*$ is decreasing in $(z/p)$. The level of unemployment $u$ is decreasing in $\theta$: hence, when $\theta$ is high, increasing $z/p$ decreases $\theta^*$ and hence increases $u$. If $\theta$ is low, increasing $z/p$ increases $\theta^*$ and hence decreases $u$.
+\problempart{6}
+Increasing $\theta$ has three effects; the first is decreasing the match rate, the second being affecting the Nash bargaining outcome by lowering the output to the firm, and the third via decreasing unemployment, which can lower $\tau$ which can increase the value of vacancies. Hence it might be possible for the returns to vacancies to be increasing in $\theta$ if the third effect is large enough, in which case the standard model steady-state is not actually a steady state in this model.
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
