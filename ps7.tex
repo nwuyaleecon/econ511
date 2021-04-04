@@ -1,0 +1,184 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+	% packages that allow mathematical formatting
+
+\usepackage[final]{graphicx}
+\usepackage{subcaption}
+	% package that allows you to include graphics
+\usepackage{tikz}
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+\renewcommand{\vector}[1]{\boldsymbol{#1}}
+\newcommand{\problem}[1]{\section*{Problem #1}}
+\newcommand{\problempart}[1]{\paragraph{#1}}
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{ECON 511 Problem Set 7}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+%\textbf{Note:} I use bold symbols to denote vectors and nonbolded symbols to denote scalars. I primarily use vector notation to shorthand some of the sums, since many of the sums are dot products.
+
+\problem{1}
+\problempart{1}
+The free entry condition implies $V = 0$ and hence from HJB:
+\[ 0 = -c + q(\theta) J \]
+\[ \frac{c}{q(\theta)} = J\]
+Using the steady state values, we have
+\[ w = (1-\beta)z + \beta p + \beta \theta  \]
+\[ J = \frac{p-w}{r + \lambda} \]
+\[ = \frac{p-(1-\beta)z - \beta p + \beta c\theta}{r + \lambda} = \frac{c}{q(\theta)} \]
+\[ p-(1-\beta)z - \beta p - \beta c\theta = \frac{c}{q(\theta)}(r + \lambda) \]
+\[ \beta p  + \beta c\theta = p-(1-\beta)z - \frac{c}{q(\theta)}(r + \lambda)  \]
+\[  \beta c\theta = (1-\beta)p-(1-\beta)z - \frac{c}{q(\theta)}(r + \lambda)  \]
+\[  \beta \theta = (1-\beta)\frac{p-z}{c} - \frac{r + \lambda}{q(\theta)}  \]
+\problempart{2}
+Taking the partial derivative wrt $p$, we get
+\[ \beta \frac{\partial \theta}{\partial p} = (1-\beta)\frac{1}{c} + \frac{r+\lambda}{q(\theta)^2}\frac{\partial q}{\partial \theta} \frac{\partial \theta}{\partial p} \]
+\[ \beta \frac{\partial \theta}{\partial p} = (1-\beta)\frac{1}{c} + \frac{r+\lambda}{\theta q(\theta) }\eta(\theta) \frac{\partial \theta}{\partial p} \]
+\[ \left( \beta - \frac{r+\lambda}{\theta q(\theta) }\eta(\theta)  \right) \frac{\partial \theta}{\partial p} = (1-\beta)\frac{1}{c} \]
+\[ \frac{p}{\theta} \frac{\partial \theta}{\partial p} = \frac{1-\beta}{\beta - \frac{r+\lambda}{\theta q(\theta) }\eta(\theta)}\frac{p}{c \theta} \]
+\[ \epsilon_{\theta,p} = \frac{1-\beta}{\beta - \frac{r+\lambda}{\theta q(\theta) }\eta(\theta)}\frac{p}{c \theta} \]
+\problempart{3}
+The $\frac{r+\lambda}{\theta q(\theta) }\eta(\theta)$ term is negligible, and $\beta ~ 1/2$, so
+\[ \epsilon_{\theta,p} \sim \frac{p}{c \theta} \]
+Since $\frac{r+\lambda}{ q(\theta) }$ is also negligible, from part 1,
+\[ \beta \theta \sim (1-\beta)\frac{p-z}{c} \]
+\[  \theta \sim \frac{p-z}{c} \]
+since $\beta \sim 1/2$. Hence
+\[ \epsilon_{\theta,p} \sim \frac{p}{c \theta} \sim \frac{p}{p-z} \]
+The RHS is a measure of unproductivity; the larger $p$ is relative to $z$, the smaller the RHS gets, and vice versa.
+\problempart{4}
+From the previous part, we have
+\[ \frac{p}{p-z} \approx 20 \]
+\[ \frac{p-z}{p} \approx 0.05 \]
+\[ \frac{z}{p} \approx 0.95 \]
+\[ \frac{p}{z} \approx 1.05 \]
+This says that the value of a filled job isn't that much better than the unemployment benefit, which implies that job loss/unemployment is not that bad from the social planner perspective.
+\problempart{5}
+The HJB equations are
+\[ rU(p) = z + \sqrt{\theta(p)}(W(p) - U(p)) + \alpha \mathbb{E}_{p'}[U(p') - U(p) \mid p]\]
+\[ rJ(p) = p - w(p) - \lambda(J(p) - V(p)) + \alpha \mathbb{E}_{p'}[J(p') - J(p) \mid p]\]
+\[ rV(p) = -c + \frac{1}{\sqrt{\theta(p)}}(J(p) - V(p)) + \alpha \mathbb{E}_{p'}[V(p') - V(p) \mid p]\]
+\problempart{6}
+Since $\beta = 0.5$, the Nash bargaining solution gives
+\[ S(p) = W(p) + J(p) - U(p) - V(p) = 2(W(p) - U(p)) = 2(J(p) - V(p)) \]
+Using the HJB equations, we get
+\[ r(J(p) - V(p)) = p - w(p) - \lambda(J(p) - V(p)) + \alpha \mathbb{E}_{p'}[J(p') - J(p) \mid p] + c - \frac{1}{\sqrt{\theta(p)}}(J(p) - V(p)) - \alpha \mathbb{E}_{p'}[V(p') - V(p) \mid p] \]
+\[ (r+\lambda)(J(p) - V(p)) = p - w(p)  + \alpha \mathbb{E}_{p'}[(J(p') - V(p')) - (J(p) - V(p)) \mid p] + c - \frac{1}{\sqrt{\theta(p)}}(J(p) - V(p))  \]
+\[ 2\left(r+\lambda + \frac{1}{\sqrt{\theta(p)}}\right)(J(p) - V(p)) = 2p - 2w(p) + 2c  + \alpha \mathbb{E}_{p'}[S(p') - S(p) \mid p]  \]
+\[ \left(r+\lambda + \frac{1}{\sqrt{\theta(p)}}\right)S(p) = 2p - 2w(p) + 2c  + \alpha \mathbb{E}_{p'}[S(p') - S(p) \mid p]  \]
+Similarly,
+\[ r(W(p) - U(p)) = w(p) - \lambda (W(p) - U(p)) + \alpha \mathbb{E}_{p'}[W(p') - W(p) \mid p] - z - \sqrt{\theta(p)}(W(p) - U(p)) - \alpha \mathbb{E}_{p'}[U(p') - U(p) \mid p] \]
+\[ \left( r + \lambda + \sqrt{\theta(p)}\right)(W(p) - U(p)) = w(p) - z + \alpha \mathbb{E}_{p'}[(W(p') - U(p')) - (W(p)-U(p)) \mid p] \]
+\[ \left( r + \lambda + \sqrt{\theta(p)}\right)S(p) = 2w(p) - 2z + \alpha \mathbb{E}_{p'}[S(p') - S(p) \mid p] \]
+\[ \left( r + \lambda + \sqrt{\theta(p)}\right)S(p) = 2w(p) - 2z + \alpha \mathbb{E}_{p'}[S(p') - S(p) \mid p] \]
+Adding the last equation to the last equation from the other part, we get
+\[ \left(2r + 2\lambda + \sqrt{\theta(p)} + \frac{1}{\sqrt{\theta(p)}}\right)S(p) = 2p + 2c - 2z + 2\alpha \mathbb{E}_{p'}[S(p') - S(p) \mid p] \]
+\[ \left(r + \lambda + \frac{1}{2}\sqrt{\theta(p)} + \frac{1}{2\sqrt{\theta(p)}}\right)S(p) = p + c - z + \alpha \mathbb{E}_{p'}[S(p') - S(p) \mid p] \]
+\problempart{7}
+From free entry, we get
+\[ J(p) = c \sqrt{\theta(p)} \]
+\[ S(p) = 2 (J(p) - V(p)) = 2c\sqrt{\theta(p)} \]
+Plugging in, we get
+\[ \left(r + \lambda + \frac{1}{2}\sqrt{\theta(p)} + \frac{1}{2\sqrt{\theta(p)}}\right)2c\sqrt{\theta(p)} = p + c - z + \alpha \mathbb{E}_{p'}[2c\sqrt{\theta(p')} - 2c\sqrt{\theta(p)} \mid p] \]
+\[ \left(2(r + \lambda)\sqrt{\theta(p)} + \theta(p)+ 1\right)c = p + c - z + 2c\alpha \mathbb{E}_{p'}[\sqrt{\theta(p')} - \sqrt{\theta(p)} \mid p] \]
+\[ \left(2(r + \lambda)\sqrt{\theta(p)} + \theta(p)\right)c = p  - z + 2c\alpha \mathbb{E}_{p'}[\sqrt{\theta(p')} - \sqrt{\theta(p)} \mid p] \]
+\problempart{8} See code.
+\problempart{9} The ratio is approximately $3.5$. This is much much lower than the empirical observations, implying the model under these parameters is not a good approximation of reality.
+\problem{2}
+\problempart{1} The assumption in the class version was that $d_t \ge \underline{d} > 0$, but in this case $d_t \to 0$, so no such $\underline{d}$ exists.
+\problempart{2}
+From the lecture slides:
+\[ \phi_t^s U'(d_t) = \lim_{n \to \infty} \sum_{j=1}^{n-1}\beta^j U'(d_{t+j})d_{t+j} + \lim_{n\to\infty}\beta^n\phi_{t+n}^sU'(d_{t+n}) \]
+At time 0,
+\[  \phi_0^s U'(c_0) = \beta U'(d_1)(\phi^s_{1} + d_1) \]
+Using the fact that $c_0 = d_0 - M \phi_0^m $,
+\[  \phi_0^s  = \beta \frac{d_0 - M \phi_0^m}{d_1}(\phi^s_{1} + d_1) \]
+Now
+\[ \frac{\phi_t^s}{d_t}  = \lim_{n \to \infty} \sum_{j=1}^{n-1}\beta^j  + \lim_{n\to\infty}\beta^n\phi_{t+n}^s\frac{1}{d_{t+n}} \]
+\[ \frac{\phi_t^s}{\beta^t \delta d_0}  = \lim_{n \to \infty} \sum_{j=1}^{n-1}\beta^j  + \lim_{n\to\infty}\phi_{t+n}^s\frac{1}{\beta^t \delta d_0} \]
+Assuming no bubbles, $\lim_{n\to\infty}\phi_{t+n}^s = 0$ so
+\[ \phi_t^s  = \frac{\beta^{t+1} \delta d_0}{1-\beta}   + \lim_{n\to\infty}\phi_{t+n}^s = \frac{\beta^{t+1} \delta d_0}{1-\beta} \]
+Plugging back into $\phi_1^s$ we get
+\[  \phi_0^s  = \beta \frac{d_0 - M \phi_0^m}{\beta \delta d_0}\left(\frac{\beta^{2} \delta d_0}{1-\beta} + \beta \delta d_0\right) = \beta (d_0 - M \phi_0^m)\left(\frac{\beta}{1-\beta} + 1\right) \]
+\[   = \frac{\beta(d_0 - M \phi_0^m)}{1-\beta} \]
+
+\problempart{3}Plugging in,
+\[ R_{t+1} = \frac{\phi_{t+1}^s + d_{t+1}}{\phi_t^s} = \frac{\frac{\beta^{t+2} \delta d_0}{1-\beta} + \beta^{t+1}\delta d_0}{\frac{\beta^{t+1} \delta d_0}{1-\beta}} = \frac{\frac{\beta }{1-\beta} + 1}{\frac{1}{1-\beta}} = 1 \]
+\problempart{4}
+From the FOCs,
+\[ \phi_t^m \lambda_t = \mu_t + \beta \phi_{t+1}^m\lambda_{t+1} \]
+The initial $t=0$ gives
+\[ \phi_0^m (d_0 - M\phi_0^m) = \beta \phi_1^m (d_{1}) \]
+\[ \frac{\phi_0^m }{d_0 - M\phi_0^m} =  \frac{\beta\phi_1^m}{d_1} \]
+\[ \frac{\phi_1^m}{\delta d_0} = \frac{1}{d_0 - M\phi_0^m}\phi_0^m  \]
+\[ \phi_1^m = \frac{\delta d_0}{d_0 - M\phi_0^m}\phi_0^m  \]
+Iterating,
+\[ \phi_t^m = \frac{\delta d_0}{d_0 - M\phi_0^m}\phi_0^m \]
+Note there is no $t$-dependence.
+\problempart{5}
+Since $\phi_t^m$ is constant over time for $t \ge 1$, the returns to money and equity are both identically 0. (the only difference is between time 0 and 1).
+\problempart{6}
+Suppose, for sake of contradiction, $\phi^0_m > 0$. The PDV of all fruit from time $t$ on is:
+\[ \sum_{j=0}^\infty \beta^j \frac{U'(d_{t+j})}{U'(d_t)}d_{t+j} = \sum_{j=0}^\infty \beta^j d_t = \frac{d_t}{1-\beta} \]
+which goes to 0 since $d_t \to 0$. But this implies that at some $t$, $\phi_t^m M $ will be larger than the value of the entire economy, implying that at that time it is not optimal for the consumer to set $m_{t+1} = M$ since the consumer can spend $d_t / \phi_t^m < M$ to buy the entire economy and have money left over. Hence we have a contradiction, and so we must have $\phi_t^m = \phi_0^m = 0$.
+\problem{3}
+\problempart{1}
+From the FOCs, we get
+\[ U'(c_t) = \lambda_t \]
+\[ \phi_t^m \lambda_t = \mu_t + \beta \phi_{t+1}^m \lambda_{t+1}  \]
+Combining, we get
+\[ \phi_t^m U'(c_t) = \mu_t + \beta \phi_{t+1}^m U'(c_{t+1})  \]
+Assuming $m_t > 0$, we get
+\[ \frac{U'(c_t)}{\beta U'(c_{t+1})}\phi_t^m  = \phi_{t+1}^m   \]
+Repeating, we get
+\[ \frac{U'(c_0)}{\beta^t U'(c_{t})}\phi_0^m  = \phi_{t}^m   \]
+Adding market clearing, we get
+\[ \frac{U'(d_0 - \phi_0^m M)}{\beta^t U'(d_t)}\phi_0^m  = \phi_{t}^m   \]
+as desired.
+\problempart{2}
+Since $d_t \to \underline{d} > 0$, taking the limit
+\[ \lim_{t\to\infty} \phi_t^m = \lim_{t \to \infty} \frac{U'(d_0 - \phi_0^m M)}{\beta^t U'(d_t)}\phi_0^m = \phi_0^m\frac{U'(d_0 - \phi_0^m M)}{U'(d_t)}\lim_{t \to \infty} \frac{1}{\beta^t } \to \infty \]
+hence the consumer wealth
+\[ \phi_t^s + d_t + \phi_t^m M \to \infty \]
+which implies that the consumer at some point can buy the economy and have money left over, violating market clearing.
+\problempart{3}
+From the FOCs, we get
+\[ U'(c_t) = \lambda_t \]
+\[ \phi_t^s \lambda_t = \beta \lambda_{t+1}(\phi_{t+1}^s + d_{t+1}) \]
+Plugging in, we get
+\[ \phi_t^s U'(c_t) = \beta U'(c_{t+1})\phi_{t+1}^s + \beta U'(c_{t+1})d_{t+1} \]
+\[  U'(c_{t})\phi_{t}^s  = \frac{1}{\beta} U'(c_{t-1})\phi_{t-1}^s - U'(c_{t})d_{t}\]
+\[    = \frac{1}{\beta} \left(\frac{1}{\beta} U'(c_{t-2})\phi_{t-2}^s - U'(c_{t-1})d_{t-1} \right) - U'(c_{t})d_{t}\]
+\[    = \frac{1}{\beta^2}U'(c_{t-2})\phi_{t-2}^s - \frac{1}{\beta} U'(c_{t-1})d_{t-1}  - U'(c_{t})d_{t}\]
+\[    = \frac{1}{\beta^t}U'(c_{0})\phi_{0}^s - \sum_{j=0}^t \frac{1}{\beta^{t-j}} U'(c_{j})d_{j} \]
+So we get
+\[ \phi_t^s = \frac{U'(c_{0})}{\beta^tU'(c_{t})}\phi_{0}^s - \sum_{j=0}^t \frac{U'(c_{j})}{\beta^{t-j} U'(c_{t})} d_{j} \]
+\[  = \frac{U'(c_{0})}{\beta^tU'(c_{t})}\phi_{0}^s - \frac{1}{\beta^t}\sum_{j=0}^t \beta^j \frac{U'(c_{j})}{ U'(c_{t})} d_{j} \]
+\[  = \frac{1}{\beta^t}\left( \frac{U'(c_{0})}{U'(c_{t})}\phi_{0}^s - \sum_{j=0}^t \beta^j \frac{U'(c_{j})}{ U'(c_{t})} d_{j} \right) \]
+\problempart{4}
+By examining the previous expression, as long as the parenthesized stuff goes to 0 at a rate on the order of $\beta^t$, the limit $\lim_{t\to\infty} \phi_t^s < \infty$; hence it is possible for $\phi_0^s \neq 0$ and $\lim_{t\to\infty} \phi_t^s < \infty$.
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
