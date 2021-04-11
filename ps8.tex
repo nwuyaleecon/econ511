@@ -1,0 +1,132 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+	% packages that allow mathematical formatting
+
+\usepackage[final]{graphicx}
+\usepackage{subcaption}
+	% package that allows you to include graphics
+\usepackage{tikz}
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+\renewcommand{\vector}[1]{\boldsymbol{#1}}
+\newcommand{\problem}[1]{\section*{Problem #1}}
+\newcommand{\problempart}[1]{\paragraph{#1}}
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{ECON 511 Problem Set 8}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+%\textbf{Note:} I use bold symbols to denote vectors and nonbolded symbols to denote scalars. I primarily use vector notation to shorthand some of the sums, since many of the sums are dot products.
+
+\problem{1}
+From the consumption problem FOC:
+\[ C_t^{1/\sigma}N_t^\varphi = \frac{W_t}{P_t} \]
+\[ Q_t = \beta \mathbb{E}_t  \left[ \left(\frac{C_t}{C_{t+1}} \right)^{1/\sigma} \frac{P_t}{P_{t+1}}\right] \]
+Log-linearizing,
+\[ C^{1/\sigma}N^\varphi + \frac{1}{\sigma}C^{1/\sigma}N^\varphi (1/C)(C - C_t) + \varphi C^{1/\sigma}N^\varphi (1/N)(N-N_t) = \frac{W}{P} + \frac{1}{P}(W - W_t) - \frac{W}{P^2}(P - P_t)\]
+\[ \frac{1}{\sigma} (1/C)(C - C_t) + \varphi (1/N)(N-N_t) =  \frac{1}{W}(W - W_t) - \frac{1}{P}(P - P_t) \]
+\[ \frac{1}{\sigma} (c_t - c^*) + \varphi (n_t - n^*) =  (w_t - w^*) - (p_t - p^*) \]
+\[ \frac{1}{\sigma}c_t + \varphi n_t = w_t - p_t \]
+and
+\[ Q^* + Q^*(\ln Q_t - \ln Q^*) = \beta - \beta \frac{1}{\sigma}\frac{1}{C^*}\mathbb{E}_t  [(C_{t+1} - C^*)] +  \beta \frac{1}{\sigma}\frac{1}{C^*}\mathbb{E}_t  [(C_{t} - C^*)] + \beta \frac{1}{P^*}(P_t - P^*) - \beta \frac{1}{P^*} (E[P_{t+1}] - P^*)\]
+\[ \ln Q_t - \ln Q^* = - \frac{1}{\sigma}\mathbb{E}_t  [c_{t+1} - c^*] +   \frac{1}{\sigma}\mathbb{E}_t  [c_t - c^*] + (p_t - p^*) -  (E[p_{t+1}] - p^*)\]
+\[ \ln Q_t - \ln Q^* = - \frac{1}{\sigma}\mathbb{E}_t  [c_{t+1} ] +   \frac{1}{\sigma}\mathbb{E}_t  [c_t] + p_t  -  E[p_{t+1}]\]
+\[ \sigma(\rho - i_t) = - \mathbb{E}_t  [c_{t+1} ] +   c_t  -  \sigma E[\pi_{t+1}]\]
+\[ \mathbb{E}_t c_{t+1} - \sigma(i_t - \rho + \mathbb{E}_t \pi_{t+1})  = c_t \]
+From the firm FOC,
+\[ \frac{W_t}{P_t} = (1-\alpha )A_tN_t^{-\alpha} \]
+Log-linearizing,
+\[ w_t - p_t = \log (1-\alpha) + a_t - \alpha n_t \]
+Lastly, from the production function,
+\[ Y_t = A_t N_t^{1-\alpha} \]
+\[ y_t = a_t + (1-\alpha) n_t \]
+All together, we get
+\[ \frac{1}{\sigma}y_t + \varphi n_t = w_t - p_t \]
+\[ \mathbb{E}_t y_{t+1} - \sigma(i_t - \rho + \mathbb{E}_t \pi_{t+1})  = y_t \]
+\[ w_t - p_t = \log (1-\alpha) + a_t - \alpha n_t \]
+\[ y_t = a_t + (1-\alpha) n_t \]
+Combining,
+\[ \frac{1}{\sigma}y_t + \varphi n_t = \log (1-\alpha) + a_t - \alpha n_t\]
+\[ \frac{1}{\sigma}(a_t + (1-\alpha) n_t) + (\varphi + \alpha) n_t = \log (1-\alpha) + a_t \]
+\[ \left(\frac{1}{\sigma} - 1\right) a_t + \left(\frac{1}{\sigma}(1-\alpha) + \varphi + \alpha \right) n_t  = \log (1-\alpha) \]
+\[ \left(\frac{1}{\sigma}(1-\alpha) + \varphi + \alpha \right) n_t  = \log (1-\alpha) + \left(1 - \frac{1}{\sigma} \right) a_t  \]
+\[ \left( 1-\alpha + \sigma(\varphi + \alpha) \right) n_t  = \sigma \log (1-\alpha) + \left(\sigma - 1 \right) a_t  \]
+\[  n_t  = \frac{\sigma \log (1-\alpha)}{1-\alpha + \sigma(\varphi + \alpha) } + \frac{\sigma - 1}{ 1-\alpha + \sigma(\varphi + \alpha)}  a_t  \]
+For $y_t$, we get
+\[ y_t = a_t + (1-\alpha) n_t \]
+\[ = a_t + (1-\alpha)\frac{\sigma \log (1-\alpha)}{1-\alpha + \sigma(\varphi + \alpha) } + (1-\alpha)\frac{\sigma - 1}{ 1-\alpha + \sigma(\varphi + \alpha)}  a_t \]
+\[ = (1-\alpha)\frac{\sigma \log (1-\alpha)}{1-\alpha + \sigma(\varphi + \alpha) } + \frac{(\sigma - 1)(1-\alpha) + (1-\alpha + \sigma(\varphi + \alpha))}{ 1-\alpha + \sigma(\varphi + \alpha)}  a_t \]
+\[ = \frac{(1-\alpha)\sigma }{1-\alpha + \sigma(\varphi + \alpha) }\log (1-\alpha) + \frac{\sigma(\varphi + 1)}{ 1-\alpha + \sigma(\varphi + \alpha)}  a_t \]
+Then we have
+\[ \omega_t = w_t - p_t = \log (1-\alpha) + a_t - \alpha n_t \]
+\[ = \log (1-\alpha) + a_t - \alpha \left(\frac{\sigma \log (1-\alpha)}{1-\alpha + \sigma(\varphi + \alpha) } + \frac{\sigma - 1}{ 1-\alpha + \sigma(\varphi + \alpha)}  a_t  \right)\]
+\[ =  \frac{(1-\alpha + \sigma(\varphi + \alpha))-\alpha \sigma }{1-\alpha + \sigma(\varphi + \alpha) }\log (1-\alpha) + \frac{(1-\alpha + \sigma(\varphi + \alpha)) + \alpha \sigma - \alpha }{ 1-\alpha + \sigma(\varphi + \alpha)}  a_t  \]
+\[ =  \frac{1-\alpha + \sigma \varphi  }{1-\alpha + \sigma(\varphi + \alpha) }\log (1-\alpha) + \frac{1 + \sigma \varphi  }{ 1-\alpha + \sigma(\varphi + \alpha)}  a_t  \]
+And finally
+\[ \mathbb{E}_t y_{t+1} - \sigma(r_t - \rho )  = y_t \]
+\[ \rho - \frac{1}{\sigma} \mathbb{E}_t \Delta y_t = r_t  \]
+\[ r_t = \rho - \frac{1}{\sigma} \mathbb{E}_t \Delta y_t  \]
+\[  = \rho - \frac{ \varphi + 1 }{ 1-\alpha + \sigma(\varphi + \alpha)}  \mathbb{E}_t \Delta a_t  \]
+
+\problem{2}From equation (6),
+\[ \frac{u'(q^e)}{c'(q^e)} = \frac{u(q^e) + \beta V_0}{\beta V_1 - c(q^e)} \]
+\[ \frac{u'(q^e)}{c'(q^e)} - 1 = \frac{u(q^e) + c(q^e) + \beta (V_0- V_1)}{\beta V_1 - c(q^e)} \]
+From (4),
+\[ \beta (V_0 - V_1) = -\beta\alpha\sigma \frac{(1-M)u(q^e) + Mc(q^e)}{1-\beta(1-\alpha\sigma)}\]
+\[ u(q^e) + c(q^e) + \beta (V_0 - V_1) = \beta\alpha\sigma \frac{\left(M-1 + \frac{1-\beta(1-\alpha\sigma)}{\beta\alpha\sigma}\right)u(q^e) + \left(-M + \frac{1-\beta(1-\alpha\sigma)}{\beta\alpha\sigma} \right)c(q^e)}{1-\beta(1-\alpha\sigma)}\]
+So
+\[ \frac{u'(q^e)}{c'(q^e)} - 1 = \frac{\beta\alpha\sigma \left(\left(M -1+ \frac{1-\beta(1-\alpha\sigma)}{\beta\alpha\sigma}\right)u(q^e) + \left(-M + \frac{1-\beta(1-\alpha\sigma)}{\beta\alpha\sigma} \right)c(q^e)\right)}{(1-\beta(1-\alpha\sigma))(\beta V_1 - c(q^e))} \]
+\[  = \frac{\left(M\beta\alpha\sigma-\beta\alpha\sigma + 1-\beta(1-\alpha\sigma)\right)u(q^e) + \left(-\beta\alpha\sigma M + 1-\beta(1-\alpha\sigma) \right)c(q^e)}{(1-\beta(1-\alpha\sigma))(\beta V_1 - c(q^e))} \]
+\[  = \frac{\left(1  + M\beta\alpha\sigma -\beta )\right)u(q^e) + \left(1-\beta+\beta\alpha\sigma(1-M) \right)c(q^e)}{(1-\beta(1-\alpha\sigma))(\beta V_1 - c(q^e))} > 0 \]
+So $u'(q^e)/c'(q^e) - 1 > 0$, and therefore $u'(q^e)/c'(q^e) > 1$.
+Since $c'' > 0$, $u'' < 0$, $u'/c'$ must is decreasing, so since $u'(q^*)/c'(q^*) = 1$, we must have $q^e < q^*$.
+
+This inefficiency occurs because the seller has to accept money for specialized good during the day without contractual assurance that the money will sell for the general good in the night market.
+\problem{3}
+\problempart{1} No. Friedman rule says money should be deflating at a rate $\beta - 1$, which needs to be positive for efficiency.
+\problempart{2} From equation (10), we get
+\[ \frac{1}{\beta} = 1 + \alpha \sigma \left(\frac{u'(g^{-1}(\bar{\phi}\bar{m}))}{g'(g^{-1}(\bar{\phi}\bar{m}))} - 1 \right) \]
+\[ \frac{1-\beta + \alpha \sigma \beta}{\alpha \sigma \beta} =  \frac{u'(g^{-1}(\bar{\phi}\bar{m}))}{g'(g^{-1}(\bar{\phi}\bar{m}))}  \]
+\problempart{3}
+As $\beta \to 1$, the LHS goes to 1, so
+\[ g'(g^{-1}(\bar{\phi}\bar{m}))=  u'(g^{-1}(\bar{\phi}\bar{m}))  \]
+When $\theta = 1$, we get
+\[ g(q) = c(q) \]
+so at an efficient solution
+\[ u'(q^*) = c'(q^*) \]
+But this is exactly implied by our first equation, so we have that $g^{-1}(\bar{\phi}\bar{m}) = q^*$. Hence the quantity is efficient if $\theta = 1$.
+\problempart{4} Suppose it is efficient. Then we get
+\[ g(q^*) = \frac{\theta u'(q^*) c(q^*) + (1-\theta) u(q^*)c'(q^*)}{\theta u'(q^*) + (1-\theta)c'(q^*)} \]
+\[ u'(q^*) = g'(q^*) = \frac{(\theta u''(q^*) c(q^*) + u'(q^*)c'(q^*) +(1-\theta) u(q^*)c''(q^*))}{\theta u'(q^*) + (1-\theta)c'(q^*)} - \frac{g(q^*)(\theta u''(q^*) + (1-\theta)c''(q^*))}{\theta u'(q^*) + (1-\theta)c'(q^*)} \]
+\[ \theta (u'(q^*))^2 + (1-\theta)u'(q^*)c'(q^*) = (\theta u''(q^*) c(q^*) + u'(q^*)c'(q^*) +(1-\theta) u(q^*)c''(q^*)) - g(q^*)(\theta u''(q^*) + (1-\theta)c''(q^*)) \]
+\[ \theta (u'(q^*))^2  -\theta u'(q^*)c'(q^*) = \theta u''(q^*) (c(q^*) - g(q^*)) +(1-\theta) (u(q^*) - g(q^*))c''(q^*) \]
+\[ \theta (u'(q^*))^2 -\theta u'(q^*)c'(q^*) = \theta(1-\theta) u''(q^*)c'(q^*) \frac{ c(q^*) - u(q^*)}{\theta u'(q^*) + (1-\theta)c'(q^*)}  +(1-\theta)\theta c''(q^*) u'(q^*) \frac{ u(q^*)-  c(q^*)}{\theta u'(q^*) + (1-\theta)c'(q^*)} \]
+Using $u'(q^*) = c'(q^*)$,
+\[ 0 = \theta(1-\theta) (u''(q^*) - c''(q^*))(c(q^*) - u(q^*)) \]
+Now, $u''(q^*) \neq c''(q^*)$ (since they have different signs), $c(q^*) \neq u(q^*)$, so we need $\theta =0$ for this to be true. Then nobody would want to hold any money for $\beta <1$, and hence the value of money would be 0 in the limit as well. Hence we have a contradiction, so the equilibrium quantity must be inefficiently low.
+
+Intuitively, if $\theta < 1$, the buyer has the full cost of holding a balance but does not receive full surplus from a match, and hence must lose some consumption the night before.
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
