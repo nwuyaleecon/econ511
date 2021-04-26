@@ -1,0 +1,177 @@
+%Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+	% packages that allow mathematical formatting
+
+\usepackage[final]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{subcaption}
+	% package that allows you to include graphics
+\usepackage{tikz}
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+\renewcommand{\vector}[1]{\boldsymbol{#1}}
+\newcommand{\problem}[1]{\section*{Problem #1}}
+\newcommand{\problempart}[1]{\paragraph{#1}}
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{ECON 511 Problem Set 9}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+%\textbf{Note:} I use bold symbols to denote vectors and nonbolded symbols to denote scalars. I primarily use vector notation to shorthand some of the sums, since many of the sums are dot products.
+
+\problem{1}
+
+\problempart{1}
+The firm problem is
+\[ \max P(s^t)A_t(s^t)N_t(s^t) - W_t(s^t)N_t(s^t) \]
+so the FOC is
+\[ P(s^t)A_t(s^t) = W_t(s^t) \]
+\problempart{2}
+The consumer problem is
+\[ \max \sum_{t=0}^{\infty} \beta^t \sum_{s^t}\pi(s^t)\left(\log C_t(s^t) + \log\left(\frac{M_t(s^t)}{P_t(s^t)} \right) - \frac{N_t(s^t)^{1+\varphi}}{1+\varphi} \right)\]
+subject to
+\[P_t(s^t) C_t(s^t) + M_t(s^t)+ Q_t(s^t)B_t(s^t) \le M_{t-1}(s^{t-1}) + B_{t-1}(s^{t-1}) + W_t(s^t)N_t(s^t) - T_t(s^t) \]
+so the Lagrangian is
+\[\sum_{t=0}^{\infty} \beta^t \sum_{s^t}\pi(s^t)\left(\log C_t(s^t) + \log\left(\frac{M_t(s^t)}{P_t(s^t)} \right) - \frac{N_t(s^t)^{1+\varphi}}{1+\varphi} \right)\]\[- \lambda_t(s^t)(P_t(s^t) C_t(s^t) + M_t(s^t)+ Q_t(s^t)B_t(s^t) - M_{t-1}(s^{t-1}) - B_{t-1}(s^{t-1}) - W_t(s^t)N_t(s^t) + T_t(s^t))  \]
+The FOCs are then
+\[ \beta^t\frac{\pi(s^t)}{C_t(s^t)} = \lambda_t(s^t)P_t(s^t) \]
+\[ \beta^t\pi(s^t) N_t(s^t)^\varphi = \lambda_t(s^t)W_t(s^t) \]
+\[ \lambda_t(s^t) Q_t(s^t) = \sum_{s^{t+1}} \lambda_{t+1}(s^{t+1}) \]
+\[ \beta^t\frac{\pi(s^t)}{M_t(s^t)} = \lambda_t(s^t) - \sum_{s^{t+1}}\lambda_{t+1}(s^{t+1}) \]
+\problempart{3}
+Eliminating $\lambda_t(s^t)$, we get
+\[ \beta^t\pi(s^t) N_t(s^t)^\varphi = \beta^t\frac{\pi(s^t)}{C_t(s^t)P_t(s^t)}W_t(s^t) \]
+\[  N_t(s^t)^\varphi = \frac{W_t(s^t)}{C_t(s^t)P_t(s^t)} \]
+For $Q$, we get
+\[ \beta^t\frac{\pi(s^t)}{C_t(s^t)P_t(s^t)} Q_t(s^t) = \sum_{s^{t+1}} \beta^{t+1}\frac{\pi(s^{t+1})}{C_{t+1}(s^{t+1})P_{t+1}(s^{t+1})} \]
+\[ \frac{\pi(s^t)Q_t(s^t)}{C_t(s^t)P_t(s^t)}  = \sum_{s^{t+1}} \frac{\beta\pi(s^{t+1})}{C_{t+1}(s^{t+1})P_{t+1}(s^{t+1})} \]
+\[ Q_t(s^t)  = \sum_{s^{t+1}} \frac{\beta\pi(s^{t+1}|s_t)C_t(s^t)P_t(s^t)}{C_{t+1}(s^{t+1})P_{t+1}(s^{t+1})} \]
+\[ Q_t(s^t)  = E_{t} \frac{\beta C_t(s^t)P_t(s^t)}{C_{t+1}(s^{t+1})P_{t+1}(s^{t+1})} \]
+and for $M$, we have
+\[ \beta^t\frac{\pi(s^t)}{M_t(s^t)} = \beta^t\frac{\pi(s^t)}{C_t(s^t)P_t(s^t)} - \sum_{s^{t+1}} \frac{\beta^{t+1}\pi(s^{t+1})}{C_{t+1}(s^{t+1})P_{t+1}(s^{t+1})}  \]
+\[ \frac{1}{M_t(s^t)} = \frac{1}{C_t(s^t)P_t(s^t)} - \sum_{s^{t+1}} \frac{\beta\pi(s^{t+1}|s^t)}{C_{t+1}(s^{t+1})P_{t+1}(s^{t+1})}  \]
+\[ \frac{1}{M_t(s^t)} = \frac{1}{C_t(s^t)P_t(s^t)} - E_t \frac{\beta}{C_{t+1}(s^{t+1})P_{t+1}(s^{t+1})}  \]
+\[ \frac{1}{M_t(s^t)} = \frac{1- Q_t(s^t)}{C_t(s^t)P_t(s^t)}   \]
+\problempart{4}
+From market clearing, we have
+\[ A_t(s^t)N_t(s^t) = C_t(s^t) \]
+From the firm FOC
+\[ P(s^t)A_t(s^t) = W_t(s^t) \]
+From the previous part
+\[  N_t(s^t)^\varphi = \frac{W_t(s^t)}{C_t(s^t)P_t(s^t)} \]
+so
+\[  N_t(s^t)^\varphi = \frac{P(s^t)A_t(s^t)}{C_t(s^t)P_t(s^t)} = \frac{A_t(s^t)}{C_t(s^t)} = \frac{1}{N_t(s^t)} \]
+\[ N_t(s^t)^{\varphi+1} = 1 \]
+\[ (1 + \varphi)\log N_t = 0 \]
+\[ n_t = 0 \]
+Since
+\[ A_t(s^t)N_t(s^t) = C_t(s^t) \]
+\[ \log A_t(s^t) + \log N_t(s^t) = \log C_t(s^t) \]
+\[ a_t + n_t = c_t \]
+\[ a_t = c_t \]
+And since $Y_t = C_t$, by market clearing, $y_t = c_t = a_t$.
+\problempart{5}
+Log linearizing, we get
+\[ \varphi n_t = w_t - c_t - p_t  \]
+\[ Q_t(s^t)  = E_{t} \frac{\beta C_t(s^t)P_t(s^t)}{C_{t+1}(s^{t+1})P_{t+1}(s^{t+1})} \]
+\[ -i_t = -\rho -  E_t(p_{t+1} - p_t) - E_t(c_{t+1} - c_t)  \]
+\[ c_t = \rho - i_t + E_t\pi_{t+1} + E_t c_{t+1} \]
+\[ m_t = c_t + p_t - \log(1-Q_t)\]
+
+\problempart{6}
+From a constant velocity of money, we get
+\[ p_t + c_t - m_t = p_{t-1} + c_{t-1} - m_{t-1} \]
+\[ \pi_t + c_t - c_{t-1} + m_{t-1} - m_t = 0 \]
+\[ \pi_t + a_t - a_{t-1} + m_{t-1} - m_t = 0 \]
+\[ \pi_t + \ln(1 + \gamma_a) - \ln(1 + \gamma_m) + \epsilon_a^t - \epsilon_m^t \]
+\[ \pi_t = \ln(1 + \gamma_m) - \ln(1 + \gamma_a) + \epsilon_m^t - \epsilon_a^t \]
+Plugging into Euler eq
+\[ c_t = \rho + i_t - E_t\pi_{t+1} - E_t c_{t+1} \]
+\[ = \rho - i_t + E_t\left(\ln(1 + \gamma_m) - \ln(1 + \gamma_a) + \epsilon_m^t - \epsilon_a^t \right) + E_t c_{t+1} \]
+\[ = \rho - i_t + \ln(1 + \gamma_m) - \ln(1 + \gamma_a) + E_t c_{t+1} \]
+\[ = \rho - i_t + \ln(1 + \gamma_m) - \ln(1 + \gamma_a) + E_t a_{t+1} \]
+\[ = \rho - i_t + \ln(1 + \gamma_m) - \ln(1 + \gamma_a) + a_t + \ln(1 + \gamma_a) \]
+\[ = \rho - i_t + \ln(1 + \gamma_m) + a_t  \]
+Since $c_t = a_t$,
+\[ \rho - i_t + \ln(1 + \gamma_m)  = 0 \]
+\[ i_t = \rho + \ln(1 + \gamma_m) \]
+Now, since
+\[ \frac{1}{M_t(s^t)} = \frac{1- Q_t(s^t)}{C_t(s^t)P_t(s^t)}   \]
+\[ V  = \frac{PY}{M} = \frac{PC}{M} = 1 - Q \approx i_t = \rho + \ln(1+ \gamma_m) \]
+as desired.
+\problempart{7}
+By constant velocity of money,
+\[ p_t + c_t - m_t = \log V \approx \log (\rho + \ln(1+ \gamma_m)) \]
+Since money only factors into the utility via $m_t - p_t = \log (M_t/P_t)$ we have that
+\[  m_t - p_t = a_t - \log V \approx \log (\rho + \ln(1+ \gamma_m)) \]
+So only $\gamma_m$ affects the utility.
+
+\problempart{8}
+The social planner problem is
+\[ \max \ln C_t + \ln \frac{M_t}{P_t} - \frac{N_t^{1+\varphi}}{1+ \varphi} \]
+subject to $C_t = A_tN_t$. The FOC in $M$ gives
+\[ \frac{1}{M} = 0 \]
+From before we hhave
+\[ 0 = \frac{1}{M} = \frac{1-Q}{PC} \]
+\[ 0 = \frac{PC}{M} = 1-Q = i \]
+Hence $i_t = 0$.
+
+
+\problem{2}
+
+\problempart{1}
+Plugging into the EE:
+\[ \hat{Y}_t = E_t \hat{Y}_{t+1} - \sigma(\hat{i}_t - E_t \hat{\pi}_{t+1} - \hat{r}_t^n) \]
+\[ \hat{Y}_t = E_t \hat{Y}_{t+1} - \sigma(\phi_y \hat{Y}_t + \phi_r \hat{r}^n_t - E_t \hat{\pi}_{t+1} - \hat{r}_t^n) \]
+\[ \hat{Y}_t = E_t \hat{Y}_{t+1} - \sigma \phi_y \hat{Y}_t - \sigma  \phi_r \hat{r}^n_t + \sigma  E_t \hat{\pi}_{t+1} + \sigma  \hat{r}_t^n \]
+\[ (1 + \sigma\phi_y)\hat{Y}_t = E_t \hat{Y}_{t+1} + \sigma  E_t \hat{\pi}_{t+1} + \sigma (1 - \phi_r)  \hat{r}_t^n \]
+\[ (1 + \sigma\phi_y)\hat{Y}_t - E_t \hat{Y}_{t+1} - \sigma (1 - \phi_r)  \hat{r}_t^n =  \sigma  E_t \hat{\pi}_{t+1}  \]
+\[  E_t \hat{\pi}_{t+1}= \frac{1 + \sigma\phi_y}{\sigma}\hat{Y}_t - \frac{1}{\sigma}E_t \hat{Y}_{t+1} -  (1 - \phi_r)  \hat{r}_t^n     \]
+Then we can take any arbitrary random $\delta_{t}$ such that $E_t \delta_{t+1} = 0$, and if
+\[ \hat{\pi}_{t+1}= \frac{1 + \sigma\phi_y}{\sigma}\hat{Y}_t - \frac{1}{\sigma}E_t \hat{Y}_{t+1} -  (1 - \phi_r)  \hat{r}_t^n + \delta_{t+1} \]
+So there cannot be a unique solution.
+\problempart{2}
+From the hint, we take
+\[ \hat{i}_t = r_t + E_t \hat{\pi}_{t+1} \]
+\[ \hat{i}_{t+1} = \phi_i \hat{i}_t + \phi_\pi \hat{\pi}_{t+1} \]
+\[ E_t \hat{i}_{t+1} = \phi_i \hat{i}_t + \phi_\pi E_t \hat{\pi}_{t+1} \]
+\[  E_t \hat{i}_{t+1} - \phi_i \hat{i}_t = \phi_\pi E_t \hat{\pi}_{t+1} \]
+\[ \hat{i}_t = r_t + \frac{1}{\phi_\pi}E_t \hat{i}_{t+1} - \frac{\phi_i}{\phi_\pi} \hat{i}_t \]
+\[  \frac{\phi_\pi + \phi_i}{\phi_\pi} \hat{i}_t = r_t + \frac{1}{\phi_\pi}E_t \hat{i}_{t+1} \]
+\[   \hat{i}_t = \frac{\phi_\pi}{\phi_\pi + \phi_i}r_t + \frac{1}{\phi_\pi + \phi_i}E_t \hat{i}_{t+1} \]
+\[   \hat{i}_t = \left(\frac{1}{\phi_\pi + \phi_i}\right)^T E_t \hat{i}_{t+T}+ \sum_{\tau = t}^{T} \frac{\phi_\pi}{(\phi_\pi + \phi_i)^{\tau - t+1}}r_{\tau} \]
+For a unique solution, we need $|\phi_\pi + \phi_i| > 1$.
+\problempart{3}
+From the EE, we have
+\[ \hat{i}_t = r_t + E_t \hat{\pi}_{t+1} \]
+\[ \phi_\pi E_t \hat{\pi}_{t+1}  = r_t + E_t \hat{\pi}_{t+1} \]
+\[ (\phi_\pi-1) E_t \hat{\pi}_{t+1}  = r_t  \]
+\[ E_t \hat{\pi}_{t+1}  = \frac{1}{\phi_\pi - 1}r_t  \]
+Then as part 1, we can take some $\delta_t$ such that $E_t\delta_{t+1} = 0$,
+\[ \hat{\pi}_{t+1} = \frac{1}{\phi_\pi - 1}r_t + \delta_{t+1} \]
+If $\phi_\pi = 1$, then $r = 0$, which is not possible. Hence all allowable values of $\phi_\pi$, there is no unique bounded solution.
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
