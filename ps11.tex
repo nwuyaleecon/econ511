@@ -1,0 +1,90 @@
+% format by Jennifer Pan, August 2011
+
+\documentclass[10pt,letter]{article}
+	% basic article document class
+	% use percent signs to make comments to yourself -- they will not show up.
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+	% packages that allow mathematical formatting
+
+\usepackage[final]{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{subcaption}
+	% package that allows you to include graphics
+\usepackage{tikz}
+\usepackage{setspace}
+	% package that allows you to change spacing
+
+\onehalfspacing
+	% text become 1.5 spaced
+
+\usepackage{fullpage}
+	% package that specifies normal margins
+
+\renewcommand{\vector}[1]{\boldsymbol{#1}}
+\newcommand{\problem}[1]{\section*{Problem #1}}
+\newcommand{\problempart}[1]{\paragraph{#1}}
+
+\begin{document}
+	% line of code telling latex that your document is beginning
+
+
+\title{ECON 511 Problem Set 11}
+
+\author{Nicholas Wu}
+
+\date{Spring 2021}
+	% Note: when you omit this command, the current dateis automatically included
+
+\maketitle
+	% tells latex to follow your header (e.g., title, author) commands.
+%\textbf{Note:} I use bold symbols to denote vectors and nonbolded symbols to denote scalars. I primarily use vector notation to shorthand some of the sums, since many of the sums are dot products.
+
+\problem{1}
+
+\problempart{1}
+From the lecture notes, we repeatedly iterate:
+\[ \log P_t = \alpha \log P_{t-1} + (1-\alpha) \log p^*_{t,t} \]
+\[ = \alpha^2 \log P_{t-2} + \alpha(1-\alpha)\log p^*_{t-1,t} + (1-\alpha) \log p^*_{t,t} \]
+\[ = \sum_{j=0}^\infty (1-\alpha)\alpha^j \log p^*_{t-j,t} \]
+So
+\[ w_j = (1-\alpha)\alpha^j \]
+\problempart{2}
+The firm problem is
+\[ \max_{p^*_{t,t+k}, k\ge 0 } \sum_{j = 0}^\infty (\alpha\beta)^j E_t[\Pi(p^*_{t,t+j}, P_{t+j},Y_{t+j}, \xi_{t+j})] \]
+\problempart{3}
+The NFOC wrt $p^*_{t, t+j}$ is
+\[ (\alpha\beta)^j E_t[\Pi_1(p^*_{t,t+j}, P_{t+j},Y_{t+j}, \xi_{t+j})] = 0 \]
+By the Useful Lemma,
+\[ \Pi_1(p^*_{t,t+j}, P_{t+j},Y_{t+j}, \xi_{t+j}) = \psi_p[\log(p^*_{t,t+j}/P_{t+j})- \zeta \log Y_{t+j}]\]
+since $Y^n$ is normalized to 1. So we get
+\[ (\alpha\beta)^j E_t[\psi_p[\log(p^*_{t,t+j}/P_{t+j})- \zeta \log Y_{t+j}]] = 0 \]
+\[ E_t[\log(p^*_{t,t+j}/P_{t+j})- \zeta \log Y_{t+j}] = 0 \]
+\[  \log(p^*_{t,t+j}) - E_t[\log (P_{t+j}) + \zeta \log Y_{t+j}] = 0 \]
+\[  \log(p^*_{t,t+j}) = E_t[\log (P_{t+j}) + \zeta \log Y_{t+j}]  \]
+Using part 1, we get
+\[ \log P_t = \sum_{j=0}^\infty (1-\alpha)\alpha^j \log p^*_{t-j,t} =\sum_{j=0}^\infty (1-\alpha)\alpha^j E_{t-j}[\log (P_t) + \zeta \log Y_t]  \]
+
+
+
+\problempart{4}
+We can interpret the changing of prices as responses to new information; in this way, the information arrives randomly with probability $1-\alpha$, and firms only set prices in response to new information.
+\problempart{5}
+No. The model requires all firms to adjust prices every period, which is a contradiction of the empirical evvidence.
+\problempart{6}
+We have
+\[ E_{t-j}\mathcal{Y}_t = \log \mathcal{Y}_{t-j} + \bar{\pi}j \]
+so
+\[ \log P_t = \sum_{j=0}^\infty (1-\alpha)\alpha^j (\log \mathcal{Y}_{t-j} + \bar{\pi}j)  \]
+\[ \log P_{t-1} = \sum_{j=0}^\infty (1-\alpha)\alpha^j (\log \mathcal{Y}_{t-1-j} + \bar{\pi}j)  \]
+\[ \log P_t  - \log P_{t-1} = \sum_{j=0}^\infty (1-\alpha)\alpha^j (\bar\pi + \varepsilon_{t-j})  \]
+\[ \pi_t  = \bar\pi +  \sum_{j=0}^\infty (1-\alpha) \alpha^j ( \varepsilon_{t-j})  \]
+Then we have
+\[ E_t\left[\frac{\pi_{t+k}}{\epsilon_t}\right] = (1-\alpha)\alpha^k \]
+
+\problempart{7}
+In the sticky price model, the price changes reflect inflation expectations, but not in the sticky information model, since many firms will have price plans that were made prior to the central bank's decision. Hence there will be more inflationary inertia in the sticky information model.
+\end{document}
+	% line of code telling latex that your document is ending. If you leave this out, you'll get an error
